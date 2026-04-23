@@ -1,7 +1,8 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, TrendingUp, Users, Globe } from "lucide-react";
+import { ArrowRight, Calendar, TrendingUp, Users, Globe, X, CheckCircle2 } from "lucide-react";
 import type { Variants } from "framer-motion";
 
 const stats = [
@@ -10,6 +11,13 @@ const stats = [
   { icon: Globe, value: "4", label: "Global Markets" },
   { icon: TrendingUp, value: "7+", label: "Companies Served" },
 ];
+
+const callWindows = [
+  "Today",
+  "Within 48 Hours",
+  "This Week",
+  "Next Week",
+] as const;
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -21,6 +29,23 @@ const fadeUp: Variants = {
 };
 
 export default function Hero() {
+  const [showBookingFlow, setShowBookingFlow] = useState(false);
+  const [preferredWindow, setPreferredWindow] = useState<(typeof callWindows)[number]>(
+    "Within 48 Hours"
+  );
+
+  const requestMessage = useMemo(
+    () =>
+      `Hi Sahil, I visited your portfolio and I would like to book a discovery call. Preferred time: ${preferredWindow}.`,
+    [preferredWindow]
+  );
+
+  const encodedMessage = encodeURIComponent(requestMessage);
+  const emailHref = `mailto:sahilaslam6657@gmail.com?subject=${encodeURIComponent(
+    "Discovery Call Request"
+  )}&body=${encodedMessage}`;
+  const whatsappHref = `https://wa.me/923431431246?text=${encodedMessage}`;
+
   return (
     <section
       id="hero"
@@ -87,13 +112,85 @@ export default function Hero() {
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="mailto:sahilaslam6657@gmail.com"
+            href="#book-call"
+            onClick={(event) => {
+              event.preventDefault();
+              setShowBookingFlow(true);
+            }}
             className="flex items-center gap-2 border border-violet-700/50 hover:border-violet-500 text-slate-300 hover:text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 text-base"
           >
             <Calendar size={18} />
             Book a Call
           </a>
         </motion.div>
+
+        {showBookingFlow && (
+          <motion.div
+            id="book-call"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mx-auto mb-12 max-w-2xl rounded-3xl border border-violet-700/40 bg-[#100f1d]/95 p-6 text-left shadow-2xl shadow-violet-900/30"
+          >
+            <div className="mb-4 flex items-start justify-between gap-4">
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-violet-300">
+                  30-Second Booking Flow
+                </p>
+                <h3 className="text-xl font-black text-white">Pick your preferred call window</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowBookingFlow(false)}
+                className="rounded-full border border-violet-700/50 p-2 text-slate-400 transition-colors hover:border-violet-500 hover:text-white"
+                aria-label="Close booking flow"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {callWindows.map((windowOption) => {
+                const isActive = preferredWindow === windowOption;
+                return (
+                  <button
+                    key={windowOption}
+                    type="button"
+                    onClick={() => setPreferredWindow(windowOption)}
+                    className={`rounded-xl border px-3 py-2 text-sm font-semibold transition-all ${
+                      isActive
+                        ? "border-violet-500 bg-violet-600/20 text-violet-200"
+                        : "border-violet-800/40 bg-[#171528] text-slate-300 hover:border-violet-600/70"
+                    }`}
+                  >
+                    {windowOption}
+                  </button>
+                );
+              })}
+            </div>
+
+            <p className="mb-5 flex items-center gap-2 text-sm text-slate-300">
+              <CheckCircle2 size={16} className="text-violet-400" />
+              Your request will be prefilled with the selected time preference.
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 rounded-xl bg-violet-600 px-5 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-violet-500"
+              >
+                Send via WhatsApp
+              </a>
+              <a
+                href={emailHref}
+                className="flex-1 rounded-xl border border-violet-600/50 px-5 py-3 text-center text-sm font-semibold text-slate-200 transition-colors hover:border-violet-500 hover:text-white"
+              >
+                Send via Email
+              </a>
+            </div>
+          </motion.div>
+        )}
 
         {/* Stats */}
         <motion.div
