@@ -16,7 +16,7 @@ const services = [
     title: "Lead Generation",
     tagline: "Qualified leads, not just contacts.",
     description:
-      "Using multi-channel outreach LinkedIn, cold email, Upwork, and referrals I deliver a consistent flow of decision-maker leads who are ready to talk. No spray-and-pray. Every lead is researched, qualified, and relevant.",
+      "Using multi-channel outreach including LinkedIn, cold email, cold calling, Upwork, and referrals, I deliver a consistent flow of decision-maker leads who are ready to talk. No spray-and-pray. Every lead is researched, qualified, and relevant.",
   },
   {
     icon: BarChart3,
@@ -30,7 +30,7 @@ const services = [
     title: "Client Acquisition",
     tagline: "Close more. Lose less.",
     description:
-      "I manage the full sales cycle from first contact to signed contract. With a consultative approach and deep understanding of IT services, I convert prospects into long-term clients who refer others.",
+      "I manage the full sales cycle from first contact to signed contract. With a consultative approach, structured proposal writing, and deep understanding of IT services, I convert prospects into long-term clients who refer others.",
   },
   {
     icon: Search,
@@ -59,7 +59,7 @@ export default function Services() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.25 }}
           className="text-center mb-16"
         >
           <p className="text-violet-400 text-sm font-semibold uppercase tracking-widest mb-3">
@@ -80,7 +80,7 @@ export default function Services() {
               key={title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.25 }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               className="card-glow rounded-2xl p-6 group"
             >

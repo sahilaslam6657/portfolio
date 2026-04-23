@@ -15,6 +15,11 @@ const achievements = [
     detail: "Built and maintained active prospect databases of 200+ decision-makers across multiple industries and geographies.",
   },
   {
+    metric: "500+",
+    label: "Qualified Leads Generated",
+    detail: "Generated 500+ qualified leads through outbound campaigns, account targeting, and consistent pipeline qualification workflows.",
+  },
+  {
     metric: "50+",
     label: "International Deals Closed",
     detail: "Successfully closed deals with clients in the US, UK, UAE, Germany, and Australia spanning web, mobile, and ERP projects.",
@@ -47,7 +52,7 @@ export default function Achievements() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.25 }}
           className="text-center mb-16"
         >
           <p className="text-violet-400 text-sm font-semibold uppercase tracking-widest mb-3">
@@ -68,7 +73,7 @@ export default function Achievements() {
               key={label}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.25 }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               className="card-glow rounded-2xl p-6 group"
             >

@@ -1,23 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, TrendingUp, Users, Globe, X, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Calendar, TrendingUp, Users, Globe } from "lucide-react";
 import type { Variants } from "framer-motion";
+import BookingScheduler from "./BookingScheduler";
 
 const stats = [
-  { icon: TrendingUp, value: "5+", label: "Years in IT Sales" },
+  { icon: TrendingUp, value: "4+", label: "Years in IT Sales" },
   { icon: Users, value: "50+", label: "Clients Acquired" },
   { icon: Globe, value: "4", label: "Global Markets" },
   { icon: TrendingUp, value: "7+", label: "Companies Served" },
 ];
-
-const callWindows = [
-  "Today",
-  "Within 48 Hours",
-  "This Week",
-  "Next Week",
-] as const;
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -30,21 +24,18 @@ const fadeUp: Variants = {
 
 export default function Hero() {
   const [showBookingFlow, setShowBookingFlow] = useState(false);
-  const [preferredWindow, setPreferredWindow] = useState<(typeof callWindows)[number]>(
-    "Within 48 Hours"
-  );
 
-  const requestMessage = useMemo(
-    () =>
-      `Hi Sahil, I visited your portfolio and I would like to book a discovery call. Preferred time: ${preferredWindow}.`,
-    [preferredWindow]
-  );
+  useEffect(() => {
+    const openFromHash = () => {
+      if (window.location.hash === "#book-call") {
+        setShowBookingFlow(true);
+      }
+    };
 
-  const encodedMessage = encodeURIComponent(requestMessage);
-  const emailHref = `mailto:sahilaslam6657@gmail.com?subject=${encodeURIComponent(
-    "Discovery Call Request"
-  )}&body=${encodedMessage}`;
-  const whatsappHref = `https://wa.me/923431431246?text=${encodedMessage}`;
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, []);
 
   return (
     <section
@@ -67,7 +58,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 bg-violet-900/40 border border-violet-700/40 text-violet-300 text-xs font-semibold px-4 py-2 rounded-full mb-8 tracking-wide uppercase"
         >
           <span className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
-          Available for New Opportunities
+          Scaling Revenue Engines Across Global B2B Markets
         </motion.div>
 
         {/* Headline */}
@@ -91,7 +82,7 @@ export default function Hero() {
           animate="show"
           className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Business Development Executive with 5+ years helping IT companies generate
+          Business Development Executive with 4+ years helping IT companies generate
           qualified leads, close international deals, and build scalable sales pipelines
           across the US, Europe, and the Middle East.
         </motion.p>
@@ -105,10 +96,15 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
         >
           <a
-            href="#contact"
+            href="#book-call"
+            onClick={(event) => {
+              event.preventDefault();
+              setShowBookingFlow(true);
+              window.location.hash = "book-call";
+            }}
             className="group flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-bold px-8 py-4 rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-violet-500/30 text-base"
           >
-            Hire Me
+            Book Growth Consultation
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <a
@@ -116,6 +112,7 @@ export default function Hero() {
             onClick={(event) => {
               event.preventDefault();
               setShowBookingFlow(true);
+              window.location.hash = "book-call";
             }}
             className="flex items-center gap-2 border border-violet-700/50 hover:border-violet-500 text-slate-300 hover:text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 text-base"
           >
@@ -124,73 +121,7 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {showBookingFlow && (
-          <motion.div
-            id="book-call"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mx-auto mb-12 max-w-2xl rounded-3xl border border-violet-700/40 bg-[#100f1d]/95 p-6 text-left shadow-2xl shadow-violet-900/30"
-          >
-            <div className="mb-4 flex items-start justify-between gap-4">
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-violet-300">
-                  30-Second Booking Flow
-                </p>
-                <h3 className="text-xl font-black text-white">Pick your preferred call window</h3>
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowBookingFlow(false)}
-                className="rounded-full border border-violet-700/50 p-2 text-slate-400 transition-colors hover:border-violet-500 hover:text-white"
-                aria-label="Close booking flow"
-              >
-                <X size={16} />
-              </button>
-            </div>
-
-            <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {callWindows.map((windowOption) => {
-                const isActive = preferredWindow === windowOption;
-                return (
-                  <button
-                    key={windowOption}
-                    type="button"
-                    onClick={() => setPreferredWindow(windowOption)}
-                    className={`rounded-xl border px-3 py-2 text-sm font-semibold transition-all ${
-                      isActive
-                        ? "border-violet-500 bg-violet-600/20 text-violet-200"
-                        : "border-violet-800/40 bg-[#171528] text-slate-300 hover:border-violet-600/70"
-                    }`}
-                  >
-                    {windowOption}
-                  </button>
-                );
-              })}
-            </div>
-
-            <p className="mb-5 flex items-center gap-2 text-sm text-slate-300">
-              <CheckCircle2 size={16} className="text-violet-400" />
-              Your request will be prefilled with the selected time preference.
-            </p>
-
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 rounded-xl bg-violet-600 px-5 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-violet-500"
-              >
-                Send via WhatsApp
-              </a>
-              <a
-                href={emailHref}
-                className="flex-1 rounded-xl border border-violet-600/50 px-5 py-3 text-center text-sm font-semibold text-slate-200 transition-colors hover:border-violet-500 hover:text-white"
-              >
-                Send via Email
-              </a>
-            </div>
-          </motion.div>
-        )}
+        <BookingScheduler isOpen={showBookingFlow} onClose={() => setShowBookingFlow(false)} />
 
         {/* Stats */}
         <motion.div

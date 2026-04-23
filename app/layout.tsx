@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Sahil Jr Business Development Executive",
   description:
-    "I help IT companies generate leads, close international deals, and build scalable sales pipelines. 5+ years driving revenue across US, Europe, and the Middle East.",
+    "I help IT companies generate leads, close international deals, and build scalable sales pipelines. 4+ years driving revenue across US, Europe, and the Middle East.",
   keywords: [
     "Business Development Executive",
     "Lead Generation",

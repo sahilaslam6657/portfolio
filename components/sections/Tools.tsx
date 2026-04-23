@@ -48,7 +48,7 @@ export default function Tools() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.25 }}
           className="text-center mb-16"
         >
           <p className="text-violet-400 text-sm font-semibold uppercase tracking-widest mb-3">
@@ -69,7 +69,7 @@ export default function Tools() {
               key={label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.25 }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               className="card-glow rounded-2xl p-6"
             >

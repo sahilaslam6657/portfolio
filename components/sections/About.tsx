@@ -20,7 +20,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.25 }}
             transition={{ duration: 0.7 }}
             className="relative"
           >
@@ -41,7 +41,7 @@ export default function About() {
 
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { label: "Experience", value: "5+ Years" },
+                  { label: "Experience", value: "4+ Years" },
                   { label: "Markets", value: "US · EU · ME" },
                   { label: "Specialization", value: "IT Services" },
                   { label: "Focus", value: "B2B Sales" },
@@ -59,7 +59,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.25 }}
             transition={{ duration: 0.7 }}
           >
             <p className="text-violet-400 text-sm font-semibold uppercase tracking-widest mb-3">
@@ -70,7 +70,7 @@ export default function About() {
               <span className="gradient-text">I Build Revenue Engines.</span>
             </h2>
             <p className="text-slate-400 leading-relaxed mb-6">
-              With over 5 years in IT services sales, I've helped startups and established
+              With over 4 years in IT services sales, I've helped startups and established
               tech companies break into new markets, shorten their sales cycles, and close
               deals that actually stick. My approach combines data-driven prospecting with
               relationship-first selling because the best deals are built on trust.

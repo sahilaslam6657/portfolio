@@ -59,7 +59,7 @@ export default function Process() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.25 }}
           className="text-center mb-16"
         >
           <p className="text-violet-400 text-sm font-semibold uppercase tracking-widest mb-3">
@@ -80,7 +80,7 @@ export default function Process() {
               key={step}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.25 }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="relative card-glow rounded-2xl p-6 group overflow-hidden"
             >

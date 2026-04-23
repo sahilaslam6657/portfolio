@@ -38,7 +38,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.25 }}
           className="mb-16"
         >
           <p className="text-violet-400 text-sm font-semibold uppercase tracking-widest mb-3">
@@ -58,7 +58,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.25 }}
           transition={{ delay: 0.1 }}
           className="grid md:grid-cols-3 gap-5 mb-12"
         >
@@ -88,12 +88,12 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.25 }}
           transition={{ delay: 0.2 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
-            href="mailto:sahilaslam6657@gmail.com"
+            href="#book-call"
             className="group flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white font-bold px-10 py-4 rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-violet-500/30 text-base"
           >
             <MessageSquare size={18} />

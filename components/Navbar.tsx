@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const links = [
@@ -15,6 +16,12 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -50,10 +57,10 @@ export default function Navbar() {
         </ul>
 
         <a
-          href="#contact"
+          href="#book-call"
           className="hidden md:inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-violet-500/25"
         >
-          Hire Me
+          Book Consultation
         </a>
 
         {/* Mobile toggle */}
@@ -80,14 +87,19 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="#book-call"
             onClick={() => setOpen(false)}
             className="bg-violet-600 text-white text-center font-semibold px-5 py-2.5 rounded-full"
           >
-            Hire Me
+            Book Consultation
           </a>
         </div>
       )}
+
+      <motion.div
+        style={{ scaleX: progress, transformOrigin: "0% 50%" }}
+        className="h-[2px] bg-linear-to-r from-violet-500 via-fuchsia-400 to-cyan-400"
+      />
     </header>
   );
 }

@@ -42,11 +42,11 @@ const experiences = [
   {
     company: "ProgrammX",
     url: "#",
-    role: "BDE",
+    role: "BDM",
     type: "IT Services",
     achievements: [
       "Managed Upwork and LinkedIn profiles to generate consistent inbound leads",
-      "Closed 15+ projects in the first quarter, exceeding targets by 40%",
+      "Built foundational lead-generation workflows and nurtured early-stage pipeline opportunities through structured outreach",
       "Developed pitch decks and service proposals tailored to client pain points",
     ],
   },
@@ -64,7 +64,7 @@ const experiences = [
   {
     company: "TWS",
     url: "#",
-    role: "Business Development",
+    role: "Business Development Executive",
     type: "IT Services · Digital Solutions",
     achievements: [
       "Gained foundational experience in B2B sales, lead generation, and client communication",
@@ -75,7 +75,7 @@ const experiences = [
   {
     company: "Search O Pal",
     url: "#",
-    role: "Business Development",
+    role: "Sales Executive",
     type: "IT Services · Digital Solutions",
     achievements: [
       "Gained foundational experience in B2B sales, lead generation, and client communication",
@@ -96,7 +96,7 @@ export default function Experience() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.25 }}
           className="text-center mb-16"
         >
           <p className="text-violet-400 text-sm font-semibold uppercase tracking-widest mb-3">
@@ -117,7 +117,7 @@ export default function Experience() {
                 key={exp.company}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.25 }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 className={`relative md:w-[calc(50%-2rem)] ${
                   i % 2 === 0 ? "md:ml-0 md:mr-auto" : "md:ml-auto md:mr-0"
